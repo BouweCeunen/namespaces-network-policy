@@ -1,0 +1,49 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  namespace: ops
+  name: namespaces-network-policy
+  labels:
+    app: namespaces-network-policy
+spec:
+  serviceName: namespaces-network-policy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: namespaces-network-policy
+    spec:
+      serviceAccountName: namespaces-network-policy
+      imagePullSecrets:
+        - name: regcred
+      containers:
+      - name: namespaces-network-policy
+        imagePullPolicy: Always
+        image: bouwe/namespaces-network-policy:0.0.1
+        command: ['python','-u','policy.py']
+        resources:
+          limits:
+            cpu: 250m
+            memory: 250Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+        volumeMounts:
+        - name: data
+          mountPath: /etc
+        - name: excluded-namespaces-volume
+          mountPath: /etc/excluded_namespaces
+          subPath: excluded_namespaces
+      volumes:
+        - name: excluded-namespaces-volume
+          configMap:
+            name: excluded-namespaces-network-policy
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: ssd
+      resources:
+        requests:
+          storage: 1Gi

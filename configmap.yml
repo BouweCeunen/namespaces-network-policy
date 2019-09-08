@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: excluded-namespaces-network-policy
+  namespace: ops
+data:
+    excluded_namespaces:
+      gatekeeper-system 
+      kubernetes-dashboard
+      dex
+      jaeger
+      kube-system
