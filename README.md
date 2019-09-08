@@ -1,4 +1,4 @@
-# bitbucket-backups
+# namespaces-network-policy
 Applies network policy which blocks incoming traffic from other namespaces when a namespace is created.
 
 [![DockerHub Badge](https://dockeri.co/image/bouwe/namespaces-network-policy)](https://hub.docker.com/r/bouwe/namespaces-network-policy)
