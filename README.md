@@ -1,4 +1,4 @@
-# namespaces-network-policy
+# Namespaces Network Policy
 Applies network policy which blocks incoming traffic from other namespaces when a namespace is created.
 
 Feel free to read about this with some more details on [Medium](https://medium.com/axons/essential-kubernetes-tools-94503209d1cb).
