@@ -93,7 +93,7 @@ for event in w.stream(kubernetesv1.list_namespace, _request_timeout=0, resource_
         if event_name not in excluded_namespaces:
           whitelist('allow-intra-namespace', event_name)
     else:
-      if event['raw_object']['reason'] == 'Gone' or event['raw_object']['reason'] == 'Expired' :
+      if event['raw_object']['reason'] == 'Gone' or event['raw_object']['reason'] == 'Expired':
         message = event['raw_object']['message']
         resource_version = message[message.find("(")+1:message.find(")")]
 
